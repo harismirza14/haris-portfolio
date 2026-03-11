@@ -225,6 +225,7 @@ export default function Portfolio() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -241,7 +242,12 @@ const handleSend = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("/api/sendemail", {
+    // Use different URLs for development vs production
+    const apiUrl = import.meta.env.DEV 
+      ? 'http://localhost:3001/api/sendemail' 
+      : '/api/sendemail';
+
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -258,15 +264,13 @@ const handleSend = async (e) => {
     if (response.ok) {
       setSent(true);
       setFormData({ name: "", email: "", message: "" });
-
-      setTimeout(() => {
-        setSent(false);
-      }, 3000);
+      setTimeout(() => setSent(false), 3000);
     } else {
-      alert("Error sending message");
+      alert(data.error || "Error sending message");
     }
   } catch (error) {
     console.error("Error:", error);
+    alert("Failed to send message. Please check your connection and try again.");
   }
 };
 
