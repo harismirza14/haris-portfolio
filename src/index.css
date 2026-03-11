@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* ── Hard reset of ALL Vite defaults ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  display: block !important;        /* override Vite's flex */
+  place-items: unset !important;    /* override Vite's place-items */
+  background-color: #080c14;
+  overflow-x: hidden;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: #f1f5f9;
+}
+
+#root {
+  max-width: 100% !important;       /* override Vite's 1280px */
+  padding: 0 !important;            /* override Vite's 2rem padding */
+  text-align: left !important;      /* override Vite's center */
+  width: 100%;
+}
+
+/* Reset Vite button styles that bleed into portfolio */
+button {
+  border-radius: unset;
+  border: unset;
+  padding: unset;
+  font-size: unset;
+  font-weight: unset;
+  background-color: unset;
+  cursor: pointer;
+  transition: unset;
+  font-family: inherit;
+}
+
+button:hover {
+  border-color: unset;
+}
+
+button:focus,
+button:focus-visible {
+  outline: unset;
+}
+
+/* Reset Vite link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: unset;
+}
+
+a:hover {
+  color: inherit;
+}
+
+/* Reset Vite h1 */
+h1 {
+  font-size: unset;
+  line-height: unset;
+}
+
+/* Reset Vite color-scheme interference */
+:root {
+  color-scheme: unset;
+  color: unset;
+  background-color: unset;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
