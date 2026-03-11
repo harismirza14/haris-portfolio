@@ -33,9 +33,10 @@ export default async function handler(req, res) {
     // For local development, we'll use a different approach
     // This will work when deployed to Vercel
     if (process.env.VERCEL) {
-      const nodemailer = require('nodemailer');
+      // Use dynamic import instead of require
+      const nodemailer = await import('nodemailer');
       
-      const transporter = nodemailer.createTransport({
+      const transporter = nodemailer.default.createTransport({
         service: 'gmail',
         auth: {
           user: process.env.GMAIL_USER,
