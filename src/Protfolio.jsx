@@ -237,12 +237,38 @@ export default function Portfolio() {
     setMenuOpen(false);
   };
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
-  };
+const handleSend = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setSent(true);
+      setFormData({ name: "", email: "", message: "" });
+
+      setTimeout(() => {
+        setSent(false);
+      }, 3000);
+    } else {
+      alert("Error sending message");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
   const theme = dark ? "dark" : "light";
 
